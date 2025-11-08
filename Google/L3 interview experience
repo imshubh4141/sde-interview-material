@@ -26,12 +26,12 @@ Q1 - Write a class that can be used to query addresses from an address book. An 
     Approach 2 - was only able to give an approach, unable to code
     Store the address as a tree, as a state can have multiple cities, a city can have multiple streets, and a street can multiple street numbers. The idea is to scan the tree to find a valid path against the query address and if found return true taking care of null values
 
-Onsite round 2
-Imagine you are working for the google calendar and they want to create a feature that helps users schedule meetings. Give two users and a duration for the meeting, find a time where the two users are free and can have the meeting
+Onsite round 2(DSA round)
+Q1 - Imagine you are working for the google calendar and they want to create a feature that helps users schedule meetings. Give two users and a duration for the meeting, find a time where the two users are free and can have the meeting
 inputs: User 1 availabitly intervals [start, end], User 2 availability intervals [start, end], the duration of the meeting
 
-Onsite round 3 - Googlyness round
+Onsite round 3 (Googlyness round)
 Interviewer started by introducing himself and his team post which I introduced myself. I asked him about his role and how they work with product and business.
 
-Onsite round 4
-Let's say we work in a company and we make pencils. Our company has a customer service dept in which the operators help our customer. It uses a phone system which is very old and has a big limitation. It has a fixed number of physical lines which means it can only support upto those fixed number of simultaneous lines. If a call comes when all phone systems are engaged, the customer will not be able to connect at all until a line is free. There is no waiting queue. The CFO has ordered to add more capacity to the phone and asks you to give a saturation report to make a decision. You are given a days worth of call logs with each 3 entries in it [start time- HHMM] and the duration. You need to return the total number of minutes where all the lines were engaged.
+Onsite round 4 (DSA round)
+Q1 - Let's say we work in a company and we make pencils. Our company has a customer service dept in which the operators help our customer. It uses a phone system which is very old and has a big limitation. It has a fixed number of physical lines which means it can only support upto those fixed number of simultaneous lines. If a call comes when all phone systems are engaged, the customer will not be able to connect at all until a line is free. There is no waiting queue. The CFO has ordered to add more capacity to the phone and asks you to give a saturation report to make a decision. You are given a days worth of call logs with each 3 entries in it [start time- HHMM] and the duration. You need to return the total number of minutes where all the lines were engaged.
