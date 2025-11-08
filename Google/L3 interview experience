@@ -1,0 +1,37 @@
+Google Interview questions L3 level
+
+Screening round (DSA round) - cleared
+Q1 - Give an array of 0s and 1s, sort it as efficiently as possible.
+    Approach 1
+    Gave a naive approach of sorting using an efficent algorithm like merge sort, TC - O(nlogn), SC - O(n)
+
+    Approach 2
+    A more optimized approach by counting the number of 0s & 1s and then inserting all the 0s first and then the 1s
+    TC - O(n), SC - O(1)
+
+    Follow up: Can the TC be further optimized? - No, because we have check every element atleast once to check if any array is sorted
+
+Q2 - You are an architect and you build really tall skyscrapers, but you are also superstitous, you think that digit 4  is unlucky so none of your floor numbers have the digit 4. If you are given a top floor of one of your buildings, how many top floors are in it. Ex - If top floor is 5, you have 4 floors in the building excluding the 4th floor. If top floor is 21, you have 19 floors in the building excluding the 4th & 14th floor.
+
+Onsite round 1 (DSA round)
+Interview started with explaining my current position and explain something that was technically challenging or rewarding to work on.
+
+Q1 - Write a class that can be used to query addresses from an address book. An address can be represented by 4 elements: state, city name, street name and street number. Class will initially be given a list of N addresses that is the address book, then you can write queries against that address book which will tell if an address is or isn't in it. The members in the query address can be NULL for ex: [state, NULL, street, street number]. The query is considered a match if the non null members all match an address in the book.
+
+    Approach 1 (Naive)
+    Store the addresses in a List<List<>>>.
+    Scan the array lineary to check for match against the query ignoring null values
+    TC - O(N), SC - O(N), N -> number of addresses
+
+    Approach 2 - was only able to give an approach, unable to code
+    Store the address as a tree, as a state can have multiple cities, a city can have multiple streets, and a street can multiple street numbers. The idea is to scan the tree to find a valid path against the query address and if found return true taking care of null values
+
+Onsite round 2
+Imagine you are working for the google calendar and they want to create a feature that helps users schedule meetings. Give two users and a duration for the meeting, find a time where the two users are free and can have the meeting
+inputs: User 1 availabitly intervals [start, end], User 2 availability intervals [start, end], the duration of the meeting
+
+Onsite round 3 - Googlyness round
+Interviewer started by introducing himself and his team post which I introduced myself. I asked him about his role and how they work with product and business.
+
+Onsite round 4
+Let's say we work in a company and we make pencils. Our company has a customer service dept in which the operators help our customer. It uses a phone system which is very old and has a big limitation. It has a fixed number of physical lines which means it can only support upto those fixed number of simultaneous lines. If a call comes when all phone systems are engaged, the customer will not be able to connect at all until a line is free. There is no waiting queue. The CFO has ordered to add more capacity to the phone and asks you to give a saturation report to make a decision. You are given a days worth of call logs with each 3 entries in it [start time- HHMM] and the duration. You need to return the total number of minutes where all the lines were engaged.
