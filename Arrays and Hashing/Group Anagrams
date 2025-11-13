@@ -1,0 +1,4 @@
+The sorting and comparing approach is straightforward
+
+The approach where we store the count of each character in a length 26 array and use it to create a hashable key for the map is a unique approach.
+It optimized the time complexity by removing the need for sorting the string in the array.

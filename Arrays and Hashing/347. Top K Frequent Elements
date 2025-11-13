@@ -1,0 +1,24 @@
+Approach 1 - Naive 
+ - store the count of all elements in a HashMap
+ - store the key-value pairs in a List<int[]> array where int[0] is key and int[1] is freq
+ - use Arrays.sort with a comparator to sort the above list based on freq
+ - retrieve the top K items
+ TC: O(nlogn), SC: O(n), where n is length of the input array
+
+ Approach 2 - Heap/Priority queue
+ - sort the input array
+ - create a pq/max-Heap of int[] with a comparator to prioritize elements with highest freq
+ - scan the array and add each distinct element in the pq along with its freq, 0th value being the element and 1th value being the freq. Freq will be counted in the same pass
+ - pop the first K elements in the Heap and return
+ TC: O(nlogn), SC: O(n)
+
+Approach 3 - Min-heap/Priority queue (Better)
+ - store the freq of all elements in an unordered HashMap
+ - create a min heap priority queue of int[](array index 0 will store the freq, index 1 will have the element)
+ - iterate over the map and store entries in the heap. at any given time, the top element in the heap will be the one with the least freq being a min-heap
+ - if the heap size exceeds k, remove the top entry from the heap(min freq element). This way we will always maintain top k frequent element so far.
+ - at the end, heap will contain the top K most frequent elements
+TC: O(nlogk), SC: O(n + k) where n is the size of the array and k is number of elements to be returned.
+
+Approach 4 - Bucket Sort?????? - Best Approach
+
