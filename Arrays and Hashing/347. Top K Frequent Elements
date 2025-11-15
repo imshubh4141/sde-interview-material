@@ -5,6 +5,8 @@ Approach 1 - Naive
  - retrieve the top K items
  TC: O(nlogn), SC: O(n), where n is length of the input array
 
+
+Top K ask gave a hint towards potential use of a heap:
  Approach 2 - Heap/Priority queue
  - sort the input array
  - create a pq/max-Heap of int[] with a comparator to prioritize elements with highest freq
@@ -21,4 +23,10 @@ Approach 3 - Min-heap/Priority queue (Better)
 TC: O(nlogk), SC: O(n + k) where n is the size of the array and k is number of elements to be returned.
 
 Approach 4 - Bucket Sort?????? - Best Approach
-
+The intution is that the input array could have some even distribution(multiple duplicates) and we could use a bucketing strategy to place same elements
+- store freq of all elements in a HashMap
+- create a list of N+1 lists which represent N+1 buckets, N --> size of input array
+- each index in the above list represents the frequency of the elements in that index --> key intution
+- insert all the values from map with index being their freq i.e bucket them with respect to frequencies.
+- fetch the top k values from the buckets
+TC: O(n), SC: O(n)
