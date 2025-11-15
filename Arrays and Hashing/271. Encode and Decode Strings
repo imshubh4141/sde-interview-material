@@ -1,0 +1,79 @@
+Approach 1 — Naive delimiter-based
+
+Encoding
+	•	Choose a delimiter like #.
+	•	Join all strings: s1#s2#s3#....
+
+Decoding
+	•	Split on # at the server.
+
+TC: O(N)
+SC: O(N)
+N = total length of all strings
+
+Limitation:
+	•	Fails if any string itself contains #.
+
+⸻
+
+Approach 2 — Hash-based + map (stateful)
+
+Encoding
+	•	For each string:
+	•	Build a “hash” by encoding each char as its ASCII + #, e.g. 97#98#...$.
+	•	Append this hash to the final encoded string.
+	•	Store hash → originalString in a HashMap.
+
+Decoding
+	•	Split on $ to get each hash.
+	•	Look up each hash in the map and rebuild the list of strings.
+
+TC: O(N)
+SC: O(N) for encoded data + map
+
+Limitation:
+	•	Requires external state (HashMap) shared between encoder and decoder.
+	•	Not practical in real distributed systems.
+
+⸻
+
+Approach 3 — Keep lengths separately (stateful)
+
+Encoding
+	•	Concatenate all strings directly: s1s2s3....
+	•	Store lengths in a separate List<Integer>.
+
+Decoding
+	•	Use the length list to slice the big string back into original pieces.
+
+TC: O(N)
+SC: O(N) (big string + list of lengths)
+
+Limitation:
+	•	Still needs external state (the length list).
+	•	Encoder and decoder must share that side-channel.
+
+⸻
+
+Approach 4 — Length-prefix encoding (stateless, standard)
+
+Encoding
+	•	Use a StringBuilder.
+	•	For each string s:
+	•	Append: len(s) + "#" + s
+	•	Example: ["code", "love"] → "4#code4#love".
+
+Decoding
+	•	Scan the encoded string with an index i:
+	•	Move j forward until you hit '#' → parse len = encoded[i..j-1].
+	•	Next len chars from j+1 is the string.
+	•	Move i to j + 1 + len and repeat until end.
+
+TC: O(N)
+SC: O(N)
+N = total length of all characters across all strings combined.
+
+Pros:
+	•	No external state.
+	•	Safe even if strings contain # or any other characters.
+	•	This is the cleanest and standard solution

@@ -1,32 +1,50 @@
-Approach 1 - Naive 
- - store the count of all elements in a HashMap
- - store the key-value pairs in a List<int[]> array where int[0] is key and int[1] is freq
- - use Arrays.sort with a comparator to sort the above list based on freq
- - retrieve the top K items
- TC: O(nlogn), SC: O(n), where n is length of the input array
+Approach 1 — Naive (Sorting)
 
+Idea: Count → store pairs → sort → take top K
+	•	Use a HashMap to store frequencies.
+	•	Convert entries into a List<int[]> (where int[0] = element, int[1] = frequency).
+	•	Sort the list by frequency in descending order using a comparator.
+	•	Take the first K items.
 
-Top K ask gave a hint towards potential use of a heap:
- Approach 2 - Heap/Priority queue
- - sort the input array
- - create a pq/max-Heap of int[] with a comparator to prioritize elements with highest freq
- - scan the array and add each distinct element in the pq along with its freq, 0th value being the element and 1th value being the freq. Freq will be counted in the same pass
- - pop the first K elements in the Heap and return
- TC: O(nlogn), SC: O(n)
+Time: O(n log n)
+Space: O(n)
 
-Approach 3 - Min-heap/Priority queue (Better)
- - store the freq of all elements in an unordered HashMap
- - create a min heap priority queue of int[](array index 0 will store the freq, index 1 will have the element)
- - iterate over the map and store entries in the heap. at any given time, the top element in the heap will be the one with the least freq being a min-heap
- - if the heap size exceeds k, remove the top entry from the heap(min freq element). This way we will always maintain top k frequent element so far.
- - at the end, heap will contain the top K most frequent elements
-TC: O(nlogk), SC: O(n + k) where n is the size of the array and k is number of elements to be returned.
+⸻
 
-Approach 4 - Bucket Sort?????? - Best Approach
-The intution is that the input array could have some even distribution(multiple duplicates) and we could use a bucketing strategy to place same elements
-- store freq of all elements in a HashMap
-- create a list of N+1 lists which represent N+1 buckets, N --> size of input array
-- each index in the above list represents the frequency of the elements in that index --> key intution
-- insert all the values from map with index being their freq i.e bucket them with respect to frequencies.
-- fetch the top k values from the buckets
-TC: O(n), SC: O(n)
+Approach 2 — Max-Heap (PriorityQueue)
+
+Idea: Count & push all elements into a max-heap → pop top K
+	•	Sort the input array.
+	•	Count frequencies in a single scan.
+	•	Push each (element, freq) pair into a max-heap that prioritizes highest freq.
+	•	Pop K times.
+
+Time: O(n log n)
+Space: O(n)
+
+⸻
+
+Approach 3 — Min-Heap of Size K (Optimized)
+
+Idea: Maintain only top K elements in a min-heap
+	•	Count frequencies in a HashMap.
+	•	Use a min-heap of size at most K where each entry is (freq, element).
+	•	For each map entry, push into the heap.
+	•	If heap size > K → pop the smallest element (least frequent).
+	•	Remaining K elements in heap = top K frequent.
+
+Time: O(n log k)
+Space: O(n + k)
+
+⸻
+
+Approach 4 — Bucket Sort (Best Overall)
+
+Idea: Frequency can be at most n → use buckets indexed by frequency
+	•	Count frequencies in a HashMap.
+	•	Create an array/list of buckets of size n + 1.
+	•	Bucket index = frequency → each bucket stores elements with that freq.
+	•	Traverse buckets from highest freq to lowest until K elements collected.
+
+Time: O(n)
+Space: O(n)
