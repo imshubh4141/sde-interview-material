@@ -1,0 +1,64 @@
+Approach 1 - Naive
+Description: Brute force
+- For each element, compute the product of all the other elements except self using nested loops
+Time Complexity:O(n^2)
+Space Complexity:O(1)
+
+Advantages:
+- Very easy to understand and implement.
+Limitations:
+- Extremely slow due to nested loops.
+- Not suitable for large inputs.
+
+Approach 2 - Compute Total Product and Use Division
+Description:
+- Scan the array once and compute the product of all non zero elements.
+- Count how many zeros exist in the array.
+- If zero count is greater than one, then every value in the result must be zero because more than one zero eliminates all products.
+- If zero count is exactly one, then only the index containing zero gets the product of all non zero elements, and all other indices get zero.
+- If zero count is zero, then for each element, compute totalProduct divided by nums[i] and store it in the result.
+
+Time Complexity: O(n)
+Space Complexity: O(1)
+
+Advantages:
+- Simple and fast.
+- Only requires two linear scans.
+Limitations:
+- Cannot handle cases with multiple zeros cleanly.
+- Requires careful handling to avoid division by zero.
+- Not allowed if division is prohibited in the problem.
+
+Approach 3 - Optimized Prefix and Suffix Arrays
+Description:
+- Create two arrays, prefix and suffix, where prefix[i] stores the product of all elements before index i, and suffix[i] stores the product of all elements after index i.
+- Build prefix array in a left to right pass.
+- Build suffix array in a right to left pass.
+- For each index, multiply prefix[i] and suffix[i] to get the product of all elements except nums[i].
+- This avoids division and handles zeros cleanly without special cases.
+Time Complexity: O(n)
+Space Complexity: O(n)
+
+Advantages:
+- No division used.
+- Works smoothly even when the array contains zeros.
+Limitations:
+- Requires additional space for prefix and suffix arrays.
+
+Approach 4 - Best Approach Without Extra Space  
+Description:  
+- Build the prefix product in the result array by multiplying all elements to the left of each index.  
+- Then iterate from right to left while maintaining a running suffix product.  
+- Multiply the suffix product into each index to form the product of all elements to left and all elements to the right.  
+- This achieves both prefix and suffix contribution using only the output array and a single suffix variable.
+
+Time Complexity: O(n)  
+Space Complexity: O(1)
+
+Advantages:  
+- Most optimal in time and space.  
+- No division needed.  
+- Works correctly even with zeros.
+
+Limitations:  
+- Requires understanding of two-pass prefix–suffix logic.
