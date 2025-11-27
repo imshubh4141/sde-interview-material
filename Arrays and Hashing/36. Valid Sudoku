@@ -1,0 +1,50 @@
+Approach 1: brute force
+for each cell check the row, col and the subsequent square for duplicates
+TC: O(n^4), SC: O(1)
+
+Approach 2: Three pass hash based
+- Use three hash maps:
+  - rows: Map<rowIndex, Set<Character>>
+  - cols: Map<colIndex, Set<Character>>
+  - squares: Map<"r/3,c/3", Set<Character>>
+- first scan all the rows and check for duplicates
+- secondly scan all the cols and check for duplicates
+- finally scan all the 9 boxes and check for duplicates
+
+TC: O(n^2), SC: O(n^2)
+
+Approach 3: One pass - HashMap + HashSet
+- Use three hash maps:
+  - rows: Map<rowIndex, Set<Character>>
+  - cols: Map<colIndex, Set<Character>>
+  - squares: Map<"r/3,c/3", Set<Character>>
+- Traverse the board once:
+  - skip '.'
+  - compute square key = r/3 + "," + c/3
+  - if digit exists in rows[r], cols[c], or squares[square] → invalid
+  - else insert digit into all three
+TC: O(n^2), SC: O(n^2)
+
+Appraoch 4: Bit masking
+The idea is that, since we have to handle int values in the range [1,9], these nine values can represented as bits in an Integer
+for ex: 1 -> 00000010
+        2 -> 00000100
+        3 -> 00001000 ... and so on
+so instead of using three hashsets, we will use three integer arrays
+	•	Replace HashSets with 3 int arrays:
+	•	rows[9], cols[9], boxes[9] --> each integer represent an entire row/col or box
+	•	Each int stores seen digits using bits:
+	•	mask = 1 << digit --> left shift 1 to specify set bit for the current digit
+    •   box index: (r / 3) * 3 + (c / 3)
+	•	check duplicate: (rows[r] & mask) != 0 || (cols[c] & mask) != 0 || (boxes[boxIndex] & mask) != 0 --> checks if bit is set meaning already seen
+	•	insert: rows[r] |= mask --> sets the bit if not seen
+	•	Skip ‘.’
+	•	If digit repeats in row/col/box → invalid
+
+TC: O(n²)
+SC: O(1) (27 integers)
+Notes:
+	•	Fastest approach (pure bitwise ops)
+	•	Zero HashSet/Map overhead
+	•	Same logic as set approach but extremely compact
+	•	Ideal for interviews if you’re comfortable with bit manipulation
