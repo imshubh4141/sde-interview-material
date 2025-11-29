@@ -1,0 +1,53 @@
+came up with some map based approach initially which was wrong
+
+Approach 1: brute force
+- Convert the input list to a set for O(1) lookups.
+- Initialize res to store the maximum streak length.
+- For each number num in the original list:
+    - Start a new streak count at 0.
+    - Set curr = num.
+    - While curr exists in the set:
+        - Increase the streak count.
+        - Move to the next number (curr += 1).
+    - Update res with the longest streak found so far.
+- Return res after checking all numbers.
+
+TC: O(N^2), SC: O(N)
+
+Limitations: TC, processing every value of every sequence against the set
+
+Approach 2: sorting and scanning
+ - sort the array
+ - initialize res = 1, i = 1
+ - while(i < n )
+    - currSeqLen = 1
+    - while (i < n && (nums[i] - nums[i - 1] == 1)): --> count till a non consecutive value is found or array ends
+        - increment currSeqLen++;
+        - i++
+    - if while loop breaks, we reached end of a sequence
+    - store res = max(res, currSeqLen)
+    - i++
+- return res
+
+Approach 3: HashSet based (Optimal)
+The idea is to store all the values in a hashset for O(1) look up and de duplication.
+And also here we are only processing values which are start of any existing sequence
+
+- store all values in a set
+- iterate over all values in the set: --> iterating over set will avoid processing duplicates as compared to nums array
+    - if(!set.contains(curr - 1)): --> check if set does not contain curr - 1, meaning the value is a start of a sequence
+        currElem = num;
+        currSeqLen = 0;
+        while(elements.contains(currElem)){
+            currSeqLen++; --> count the length of all consecutive values in this sequence using the set
+            currElem++;
+        }
+        res = max(res, currSeqLen)
+return res
+
+TC: O(N) --> We are at max going over a specific element twice.
+SC: O(N)
+
+Approach 4: HashMap based boundary merging
+This approach was little confusing and has the same optimality as appraoch 3.
+       
